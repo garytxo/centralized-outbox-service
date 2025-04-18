@@ -1,6 +1,6 @@
 package com.murray.outbox.infrastructure.out.persistence.jooq.repository
 
-import com.murray.outbox.BaseIntegrationTest
+import com.murray.outbox.test.BaseIntegrationTest
 import com.murray.outbox.outboxevent.domain.model.OutboxEventTypeId
 import com.murray.outbox.test.data.OutBoxTestDataGenerator
 import com.murray.outbox.test.objectmother.OutboxEventObjectMother
