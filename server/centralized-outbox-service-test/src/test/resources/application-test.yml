@@ -1,0 +1,13 @@
+outbox:
+  db-outbox-service:
+    uri: ${OUTBOX_POSTGRESQL_DB_URL}
+    user:
+      name: ${OUTBOX_POSTGRESQL_USERNAME}
+      password: ${OUTBOX_POSTGRESQL_PASSWORD}
+
+
+logging:
+  level:
+    # Reduce the noise made in the logs during testing
+    org.jooq.tools.LoggerListener: ERROR
+
