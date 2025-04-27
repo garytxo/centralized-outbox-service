@@ -1,0 +1,19 @@
+outbox:
+  db-outbox-service:
+    uri: ${OUTBOX_POSTGRESQL_DB_URL}
+    user:
+      name: ${OUTBOX_POSTGRESQL_USERNAME}
+      password: ${OUTBOX_POSTGRESQL_PASSWORD}
+
+  aws:
+    region: ${TESTCONTAINERS_LOCALSTACK_REGION}
+    accessKey: ${TESTCONTAINERS_LOCALSTACK_ACCESS_KEY}
+    secretAccessKey: ${TESTCONTAINERS_LOCALSTACK_SECRET_ACCESS_KEY}
+    sqs:
+      endpoint: ${TESTCONTAINERS_LOCALSTACK_ENDPOINT}
+
+logging:
+  level:
+    # Reduce the noise made in the logs during testing
+    org.jooq.tools.LoggerListener: ERROR
+

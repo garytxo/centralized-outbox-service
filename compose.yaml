@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=central_outbox'
+      - 'POSTGRES_PASSWORD=outbox'
+      - 'POSTGRES_USER=outbox'
+    ports:
+      - '5432:5432'

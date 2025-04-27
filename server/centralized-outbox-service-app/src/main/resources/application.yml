@@ -1,0 +1,56 @@
+outbox:
+  application-name: centralized-outbox-service
+  db-outbox-service:
+    uri: localhost:5432/central_outbox
+    jdbc-url: jdbc:postgresql://${outbox.db-outbox-service.uri}
+    user:
+      name: outbox
+      password: outbox
+    pool:
+      name: "hikari-outbox-service"
+      max-size: 100
+      min-idle: 20
+  aws:
+    prefix: ${AWS_PREFIX:}
+    region: ${AWS_REGION:eu-west-1}
+    account: ${AWS_ACCOUNT_ID:}
+    accessKey: "ACCESSKEY"
+    secretAccessKey: "SECRETACCESSKEY"
+    sqs:
+      endpoint: "http://localhost:4566"
+
+spring:
+  application:
+    name: ${outbox.application-name}
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration-outbox
+    outOfOrder: true
+    schemas: central_outbox
+    default-schema: central_outbox
+
+  datasource:
+    url: ${outbox.db-outbox-service.jdbc-url}
+    driver-class-name: org.postgresql.Driver
+    username: ${outbox.db-outbox-service.user.name}
+    password: ${outbox.db-outbox-service.user.password}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: ${outbox.db-outbox-service.pool.name}
+      maximum-pool-size: ${outbox.db-outbox-service.pool.max-size}
+      minimum-idle: ${outbox.db-outbox-service.pool.min-idle}
+      jdbc-url: ${outbox.db-outbox-service.jdbc-url}
+
+  jackson:
+    property-naming-strategy: LOWER_CAMEL_CASE
+
+
+server:
+  port: 3001
+  servlet:
+    contextPath: "/api-outbox-service"
+  error:
+    include-message: always
+    include-exception: true
+    include-stacktrace: always
